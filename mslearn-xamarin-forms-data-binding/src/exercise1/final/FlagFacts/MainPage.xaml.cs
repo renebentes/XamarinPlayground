@@ -1,15 +1,16 @@
 using FlagData;
-using Xamarin.Forms;
 using FlagFacts.Extensions;
 using System;
 using System.Collections;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace FlagFacts
 {
     public partial class MainPage : ContentPage
     {
-        FlagRepository repository;
-        int currentFlag;
+        private int currentFlag;
+        private FlagRepository repository;
 
         public MainPage()
         {
@@ -24,14 +25,15 @@ namespace FlagFacts
 
         public Flag CurrentFlag
         {
-            get {
+            get
+            {
                 return repository.Flags[currentFlag];
             }
         }
 
         private void InitializeData()
         {
-            country.ItemsSource = (IList) repository.Countries;
+            country.ItemsSource = (IList)repository.Countries;
             //country.SelectedItem = CurrentFlag.Country;
             //country.SelectedIndexChanged += (s, e) => CurrentFlag.Country = repository.Countries[country.SelectedIndex];
             //country.BindingContext = CurrentFlag;
@@ -51,16 +53,17 @@ namespace FlagFacts
             this.BindingContext = CurrentFlag;
         }
 
-        private async void OnShow(object sender, EventArgs e)
-        {
-            await DisplayAlert(CurrentFlag.Country,
-                $"{CurrentFlag.DateAdopted:D} - {CurrentFlag.IncludesShield}: {CurrentFlag.MoreInformationUrl}", 
-                "OK");
-        }
-
         private void OnMoreInformation(object sender, EventArgs e)
         {
-            Device.OpenUri(CurrentFlag.MoreInformationUrl);
+            Launcher.OpenAsync(CurrentFlag.MoreInformationUrl);
+        }
+
+        private void OnNext(object sender, EventArgs e)
+        {
+            currentFlag++;
+            if (currentFlag >= repository.Flags.Count)
+                currentFlag = repository.Flags.Count - 1;
+            InitializeData();
         }
 
         private void OnPrevious(object sender, EventArgs e)
@@ -71,12 +74,11 @@ namespace FlagFacts
             InitializeData();
         }
 
-        private void OnNext(object sender, EventArgs e)
+        private async void OnShow(object sender, EventArgs e)
         {
-            currentFlag++;
-            if (currentFlag >= repository.Flags.Count)
-                currentFlag = repository.Flags.Count-1;
-            InitializeData();
+            await DisplayAlert(CurrentFlag.Country,
+                $"{CurrentFlag.DateAdopted:D} - {CurrentFlag.IncludesShield}: {CurrentFlag.MoreInformationUrl}",
+                "OK");
         }
     }
 }
