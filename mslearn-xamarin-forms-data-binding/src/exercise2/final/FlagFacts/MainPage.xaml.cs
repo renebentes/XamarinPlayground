@@ -1,14 +1,13 @@
 using FlagData;
 using Xamarin.Forms;
-using FlagFacts.Extensions;
 using System;
-using System.Collections;
+using Xamarin.Essentials;
 
 namespace FlagFacts
 {
     public partial class MainPage : ContentPage
     {
-        FlagRepository repository;
+        readonly FlagRepository repository;
         int currentFlag;
 
         public MainPage()
@@ -22,18 +21,10 @@ namespace FlagFacts
             InitializeData();
         }
 
-        public Flag CurrentFlag
-        {
-            get {
-                return repository.Flags[currentFlag];
-            }
-        }
+        public Flag CurrentFlag => repository.Flags[currentFlag];
 
         private void InitializeData()
         {
-            country.ItemsSource = (IList) repository.Countries;
-            flagImage.Source = CurrentFlag.GetImageSource();
-
             // Set the binding context
             this.BindingContext = CurrentFlag;
         }
@@ -49,7 +40,7 @@ namespace FlagFacts
 
         private void OnMoreInformation(object sender, EventArgs e)
         {
-            Device.OpenUri(CurrentFlag.MoreInformationUrl);
+            Launcher.OpenAsync(CurrentFlag.MoreInformationUrl);
         }
 
         private void OnPrevious(object sender, EventArgs e)
