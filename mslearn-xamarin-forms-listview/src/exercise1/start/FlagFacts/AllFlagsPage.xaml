@@ -10,5 +10,14 @@
     <ListView
         ItemTapped="OnItemTapped"
         ItemsSource="{Binding Flags}"
-        SelectedItem="{Binding CurrentFlag, Mode=TwoWay}" />
+        SelectedItem="{Binding CurrentFlag, Mode=TwoWay}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ImageCell
+                    Detail="{Binding DateAdopted, StringFormat='Adopted on {0:d}'}"
+                    DetailColor="Gray"
+                    Text="{Binding Country}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>
