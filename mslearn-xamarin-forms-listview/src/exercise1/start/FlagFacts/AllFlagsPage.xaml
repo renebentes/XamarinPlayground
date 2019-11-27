@@ -16,6 +16,7 @@
                 <ImageCell
                     Detail="{Binding DateAdopted, StringFormat='Adopted on {0:d}'}"
                     DetailColor="Gray"
+                    ImageSource="{Binding ImageUrl, Converter={StaticResource irConverter}}"
                     Text="{Binding Country}" />
             </DataTemplate>
         </ListView.ItemTemplate>
