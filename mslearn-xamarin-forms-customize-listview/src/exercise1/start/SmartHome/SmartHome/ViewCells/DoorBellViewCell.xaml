@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ViewCell
+    x:Class="SmartHome.DoorBellViewCell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Padding="10">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <Image
+            Grid.Column="0"
+            HeightRequest="48"
+            Source="{Binding IconUrl}"
+            WidthRequest="48" />
+
+        <StackLayout
+            Grid.Column="1"
+            VerticalOptions="Center">
+            <Label
+                FontAttributes="Bold"
+                Text="{Binding Name}" />
+            <Label
+                FontSize="Micro"
+                Text="{Binding DoorBellStatus, StringFormat='Status: {0}'}" />
+        </StackLayout>
+
+        <Label
+            Grid.Column="2"
+            FontSize="Micro"
+            Text="{Binding TimeStamp}" />
+    </Grid>
+</ViewCell>
