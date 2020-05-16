@@ -46,11 +46,13 @@ namespace Phoneword
 
             if (!string.IsNullOrEmpty(translatedNumber))
             {
-                // TODO:
+                callButton.IsEnabled = true;
+                callButton.Text = $"Call {translatedNumber}";
             }
             else
             {
-                // TODO:
+                callButton.IsEnabled = false;
+                callButton.Text = "Call";
             }
         }
     }
