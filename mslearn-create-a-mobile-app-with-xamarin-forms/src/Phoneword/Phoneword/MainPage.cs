@@ -1,3 +1,4 @@
+using System;
 using Xamarin.Forms;
 
 namespace Phoneword
@@ -33,7 +34,24 @@ namespace Phoneword
                 IsEnabled = false,
             });
 
+            translateButton.Clicked += OnTranslate;
+
             Content = panel;
+        }
+
+        private void OnTranslate(object sender, EventArgs e)
+        {
+            string enteredNumber = phoneNumberText.Text;
+            translatedNumber = PhoneworldTranslator.ToNumber(enteredNumber);
+
+            if (!string.IsNullOrEmpty(translatedNumber))
+            {
+                // TODO:
+            }
+            else
+            {
+                // TODO:
+            }
         }
     }
 }
