@@ -35,8 +35,14 @@ namespace Phoneword
             });
 
             translateButton.Clicked += OnTranslate;
+            callButton.Clicked += OnCall;
 
             Content = panel;
+        }
+
+        private void OnCall(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void OnTranslate(object sender, EventArgs e)
