@@ -4,7 +4,7 @@ namespace Phoneword
 {
     public static class PhoneworldTranslator
     {
-        private static string[] digits = {
+        private static readonly string[] digits = {
             "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"
         };
 
@@ -23,6 +23,19 @@ namespace Phoneword
                 if (" -0123456789".Contains(character))
                 {
                     newNumber.Append(character);
+                }
+                else
+                {
+                    var result = TranslateToNumber(character);
+
+                    if (result != null)
+                    {
+                        newNumber.Append(result);
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
 
