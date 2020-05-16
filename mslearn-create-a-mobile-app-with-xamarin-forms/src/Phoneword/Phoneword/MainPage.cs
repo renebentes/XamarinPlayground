@@ -40,9 +40,15 @@ namespace Phoneword
             Content = panel;
         }
 
-        private void OnCall(object sender, EventArgs e)
+        private async void OnCall(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (await DisplayAlert("Dial a Number",
+                                   $"Would you like to call {translatedNumber}?",
+                                   "Yes",
+                                   "No"))
+            {
+                // TODO: dial the phone
+            }
         }
 
         private void OnTranslate(object sender, EventArgs e)
